@@ -8,7 +8,6 @@ package com.dh.divideconquer;
  */
 public class Demo001 {
 	private int num = 0; // 全局变量或者成员变量
-
 	public int count(int[] a, int n) {
 		num = 0;
 		mergeSortCounting(a, 0, n - 1);
