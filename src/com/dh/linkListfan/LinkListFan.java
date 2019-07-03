@@ -8,12 +8,12 @@ import java.util.List;
  */
 public class LinkListFan {
 	public static ListNode reverseList(ListNode head) {
+
 		ListNode temp = head;
-		if(temp==null)
-		{
+		if (temp == null) {
 			return null;
 		}
-		
+
 		List<ListNode> list = new ArrayList<ListNode>();
 
 		list.add(head);

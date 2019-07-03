@@ -22,9 +22,7 @@ public class BubbleSort implements Sort {
 	public void sort(int[] a, int n) {
 		if (n <= 1)
 			return;
-
 		for (int i = 0; i < n; i++) {
-
 			boolean flag = true;
 			for (int j = 0; j < n - i - 1; j++) {
 				if (a[j] > a[j + 1]) {
@@ -33,15 +31,11 @@ public class BubbleSort implements Sort {
 					a[j + 1] = temp;
 					flag = false;
 				}
-
 			}
 			if (flag)
 				return;
-
 		}
-
 		return;
-
 	}
 
 }
