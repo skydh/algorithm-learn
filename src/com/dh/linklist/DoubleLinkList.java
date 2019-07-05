@@ -96,7 +96,8 @@ public class DoubleLinkList {
 	public int get() {
 		if (size <= 0)
 			throw new RuntimeException("没数据，兄弟");
-		return end.value;
+		end = end.before;
+		return end.next.value;
 	}
 
 	/**

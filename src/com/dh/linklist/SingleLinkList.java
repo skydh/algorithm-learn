@@ -55,6 +55,15 @@ public class SingleLinkList {
 	}
 
 	/**
+	 * 返回哨兵节点
+	 * 
+	 * @return
+	 */
+	public LinkListNode getHead() {
+		return head;
+	}
+
+	/**
 	 * 添加元素，默认加到末尾
 	 * 
 	 * @param value
@@ -137,6 +146,86 @@ public class SingleLinkList {
 		return current.next.value;
 	}
 
+	/**
+	 * 返回size
+	 * 
+	 * @return
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * 单链表反转 很简单的思路，从头开始，一个个转向，记得让第一个元素指向null,以及head节点指向最后一个节点
+	 */
+	public void Reversal() {
+		if (size < 2)
+			return;
+
+		LinkListNode frontNode = head.next;
+		LinkListNode behindNode = frontNode.next;
+		frontNode.next = null;
+		while (behindNode != null) {
+			LinkListNode temp = behindNode.next;
+			behindNode.next = frontNode;
+			frontNode = behindNode;
+			behindNode = temp;
+		}
+		head.next = frontNode;
+
+	}
+
+	/**
+	 * 2个有序链表的合并,本来想写第一个链表合并第二个链表，但是想了下，为了可扩展性，还是创建一个新的链表
+	 */
+	public static SingleLinkList merge(SingleLinkList listM, SingleLinkList listN) {
+		SingleLinkList result = new SingleLinkList();
+		LinkListNode nodeM = listM.getHead().next;
+		LinkListNode nodeN = listN.getHead().next;
+		while (nodeM != null && nodeN != null) {
+			if (nodeM.value < nodeN.value) {
+				result.add(nodeM.value);
+				nodeM = nodeM.next;
+			} else {
+				result.add(nodeN.value);
+				nodeN = nodeN.next;
+
+			}
+		}
+		while (nodeM != null) {
+			result.add(nodeM.value);
+			nodeM = nodeM.next;
+		}
+		while (nodeN != null) {
+			result.add(nodeN.value);
+			nodeN = nodeN.next;
+		}
+
+		return result;
+
+	}
+
+	/**
+	 * 获取中间节点，很纠结 我 定义的链表有个参数就是size.哈哈哈哈 但是不考虑这个点。思索下。 如果是偶数个，比如，2,4,6,8
+	 * 那么中间节点分别是1,2,3,4。如果是奇数，那么更好算了。5 则是3,7则是4，3则是2。
+	 * 
+	 * 我们设置快慢2个节点
+	 */
+	public int getMiddleNode() {
+		LinkListNode slowNode = head.next;
+		LinkListNode quickNode = head.next.next;
+		while (quickNode != null) {
+			if (quickNode.next == null)
+				break;
+			slowNode = slowNode.next;
+			quickNode = quickNode.next.next;
+		}
+		return slowNode.value;
+	}
+
+	/**
+	 * 打印
+	 */
 	public void print() {
 		LinkListNode current = head;
 		while (current.next != null) {
