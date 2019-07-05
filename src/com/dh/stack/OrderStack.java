@@ -54,8 +54,17 @@ public class OrderStack {
 			dataNewStack[i] = dataStack[i];
 		}
 		this.dataStack = dataNewStack;
-		size=size*2;
+		size = size * 2;
 
+	}
+
+	/**
+	 * 释放空间
+	 */
+	public void release() {
+		dataStack = new int[8];
+		size = 8;
+		currentSize = 0;
 	}
 
 	/**
