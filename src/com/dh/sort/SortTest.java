@@ -1,20 +1,32 @@
 package com.dh.sort;
 
-import com.dh.sort.radix.RadixSort;
+import com.dh.sort.bubble.BubbleSort;
+import com.dh.sort.insertion.InsertSort;
 
+/**
+ * 排序测试，排序都是从小到大排序
+ * 
+ * @author Lenovo
+ *
+ */
 public class SortTest {
 
 	public static void main(String[] args) {
 		int[] a = { 1, 11, 3, 5, 8, 9, 223423, 44, 534, 6 };
-		// Sort sort = new BubbleSort();
-
-		Sort sort1 = new RadixSort();
-
-		sort1.sort(a, a.length);
+		insert(a);
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(a[i]);
 		}
+	}
 
+	public static void bubble(int[] a) {
+		BubbleSort sort = new BubbleSort();
+		sort.sort(a);
+	}
+
+	public static void insert(int[] a) {
+		InsertSort sort = new InsertSort();
+		sort.sort(a);
 	}
 
 }

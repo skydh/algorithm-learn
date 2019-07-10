@@ -77,4 +77,35 @@ public class MergeSort implements Sort {
 
 	}
 
+	/**
+	 * 第二次实现 归并排序采用的是分而治之的算法思想，将一个大问题不断分解为一个个的子问题
+	 * 个人觉得，没那么复杂，直接中分，分成一个一个的节点，然后开始向上排序，知道最上层排序
+	 * 
+	 * @param a
+	 */
+	public void mergeSort(int[] a, int i, int j) {
+		if (i == j) {
+			return;
+		}
+		int mid = (i + j) / 2;
+		mergeSort(a, i, mid);
+		mergeSort(a, mid + 1, j);
+		merge(a, i, j, mid);
+	}
+
+	/**
+	 * 2个有序数组的合并
+	 * 
+	 * @param a
+	 * @param i
+	 * @param j
+	 * @param mid
+	 */
+	public void merge(int[] a, int i, int j, int mid) {
+		int[] temp = new int[j - i + 1];
+		for (int k = i; k <= j; k++) {
+			temp[k] = a[k];
+		}
+
+	}
 }

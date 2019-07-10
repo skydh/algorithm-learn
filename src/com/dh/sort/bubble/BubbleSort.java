@@ -13,7 +13,7 @@ import com.dh.sort.Sort;
 public class BubbleSort implements Sort {
 
 	/**
-	 * 冒泡排序从小到大排序
+	 * 冒泡排序从小到大排序 这是第一次写冒泡排序
 	 * 
 	 * @param a
 	 * @param n
@@ -36,6 +36,34 @@ public class BubbleSort implements Sort {
 				return;
 		}
 		return;
+	}
+
+	/**
+	 * 这是第二次写冒泡排序 冒泡就是大的数据一点一点冒泡，冒出去
+	 * 
+	 * @param a
+	 */
+	public void sort(int[] a) {
+		for (int i = 0; i < a.length; i++) {
+			for (int j = i; j < a.length; j++) {
+				if (a[i] > a[j]) {
+					swap(a, i, j);
+				}
+			}
+		}
+	}
+
+	/**
+	 * 交换数据
+	 * 
+	 * @param a
+	 * @param i
+	 * @param j
+	 */
+	public void swap(int[] a, int i, int j) {
+		int temp = a[i];
+		a[i] = a[j];
+		a[j] = temp;
 	}
 
 }
