@@ -101,10 +101,33 @@ public class MergeSort implements Sort {
 	 * @param j
 	 * @param mid
 	 */
-	public void merge(int[] a, int i, int j, int mid) {
-		int[] temp = new int[j - i + 1];
-		for (int k = i; k <= j; k++) {
+	public void merge(int[] a, int start, int end, int mid) {
+		int[] temp = new int[a.length];
+		for (int k = start; k <= end; k++) {
 			temp[k] = a[k];
+		}
+		int i = start;
+		int j = mid + 1;
+		int cursor = start;
+		while (i <= mid && j <= end) {
+			if (temp[i] <= temp[j]) {
+				a[cursor] = temp[i];
+				i++;
+			} else {
+				a[cursor] = temp[j];
+				j++;
+			}
+			cursor++;
+		}
+		while (i <= mid) {
+			a[cursor] = temp[i];
+			i++;
+			cursor++;
+		}
+		while (j <= end) {
+			a[j] = temp[j];
+			j++;
+			cursor++;
 		}
 
 	}
