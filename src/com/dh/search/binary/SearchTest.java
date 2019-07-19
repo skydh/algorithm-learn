@@ -13,9 +13,9 @@ package com.dh.search.binary;
 public class SearchTest {
 
 	public static void main(String[] args) {
-		int[] a = { 1, 3, 4, 5, 9, 9, 9, 9, 534, 62323 };
-		FindLastSmallThanSearch simpleBinarySearch = new FindLastSmallThanSearch();
-		System.out.println(simpleBinarySearch.search(a, a.length, 534));
+		int[] a = { 1, 3, 4, 5, 9, 9, 9, 19, 29, 39, 534, 62323 };
+		RecursionBinarySearch simpleBinarySearch = new RecursionBinarySearch();
+		System.out.println(simpleBinarySearch.searchMoreThan(a, 623231, 0, a.length - 1));
 
 	}
 

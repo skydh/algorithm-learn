@@ -131,4 +131,24 @@ public class QuickSort implements Sort {
 		a[i] = a[j];
 		a[j] = temp;
 	}
+
+	/**
+	 * 返回这个数组低k大的元素
+	 * 
+	 * @param a
+	 * @param cursor
+	 * @return
+	 */
+	public int getNumber(int[] a, int cursor, int start, int end) {
+
+		int temp = getIndex(a, start, end);
+		if (cursor < temp) {
+			return getNumber(a, cursor, start, temp - 1);
+		} else if (cursor == temp) {
+			return a[temp];
+		} else {
+			return getNumber(a, cursor, temp + 1, end);
+		}
+
+	}
 }

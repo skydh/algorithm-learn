@@ -15,6 +15,7 @@ public class SortTest {
 
 	public static void main(String[] args) {
 		int[] a = { 1, 11, 3, 5, 8, 9, 223423, 44, 534, 6 };
+
 		quick(a);
 		for (int i = 0; i < a.length; i++) {
 			System.out.println(a[i]);
@@ -39,6 +40,6 @@ public class SortTest {
 	public static void quick(int[] a) {
 		QuickSort sort = new QuickSort();
 
-		sort.quickSort(a, 0, a.length - 1);
+		System.out.println(sort.getNumber(a, 4, 0, a.length-1));
 	}
 }
