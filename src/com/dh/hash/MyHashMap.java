@@ -54,7 +54,7 @@ public class MyHashMap {
 	 */
 	public void put(int key, int value) {
 		expansion();
-		put(key, value, arrayNode);
+		put(key, value, arrayNode, length);
 		size++;
 	}
 
@@ -64,7 +64,7 @@ public class MyHashMap {
 	 * @param key
 	 * @param value
 	 */
-	public void put(int key, int value, Node[] arrayNode) {
+	public void put(int key, int value, Node[] arrayNode, int length) {
 		int index = key % length;
 
 		Node indexNode = arrayNode[index];
@@ -90,17 +90,7 @@ public class MyHashMap {
 	 */
 	public void expansion() {
 		if ((length / 4) * 3 < size) {
-			length = length * 2;
-			Node[] arrayNodeTemp = new Node[length];
-			for (int i = 0; i < length / 2; i++) {
-				Node indexNode = arrayNode[i];
-				while (indexNode != null) {
-					put(indexNode.k, indexNode.v, arrayNodeTemp);
-					indexNode = indexNode.next;
-				}
-
-			}
-			arrayNode = arrayNodeTemp;
+			resize(length * 2);
 		}
 
 	}
@@ -131,9 +121,13 @@ public class MyHashMap {
 	 * @return
 	 */
 	public int remove(int key) {
+		Shrinkage();
 		int index = key % length;
 
 		Node indexNode = arrayNode[index];
+		if (indexNode == null) {
+			return -1;
+		}
 		if (indexNode.k == key) {
 			arrayNode[index] = indexNode.next;
 			size--;
@@ -149,6 +143,31 @@ public class MyHashMap {
 			indexNode = indexNode.next;
 		}
 		return -1;
+	}
+
+	/**
+	 * 缩容，当大小小于0.1时就采用缩容处理
+	 */
+	public void Shrinkage() {
+		if (length / 10 >= size) {
+			resize(length / 2);
+		}
+
+	}
+
+	public void resize(int newLength) {
+		Node[] arrayNodeTemp = new Node[newLength];
+		for (int i = 0; i < length; i++) {
+			Node indexNode = arrayNode[i];
+			while (indexNode != null) {
+				put(indexNode.k, indexNode.v, arrayNodeTemp, newLength);
+				indexNode = indexNode.next;
+			}
+
+		}
+		arrayNode = arrayNodeTemp;
+		length = newLength;
+
 	}
 
 	/**

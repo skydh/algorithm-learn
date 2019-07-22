@@ -13,7 +13,16 @@ public class HashTest {
 		hash.put(5, 23);
 		hash.put(34, 23);
 		hash.put(67, 23);
+
 		hash.remove(12);
+		hash.remove(32);
+		hash.remove(3);
+		hash.remove(20);
+		hash.remove(34);
+		hash.remove(67);
+		hash.remove(5);
+		hash.remove(4);
+
 		System.out.println(hash.get(32));
 	}
 
