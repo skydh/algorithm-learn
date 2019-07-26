@@ -147,6 +147,7 @@ public class BinaryTree {
 
 					/**
 					 * 让父节点的右子指向最大节点的左子，现在相当于删除了这个节点了
+					 * 这里这个判断是为了防止左边最大节点的父节点就是被删除节点
 					 */
 					if (ftempNode.right == tempNode) {
 						ftempNode.right = tempNode.left;
@@ -158,6 +159,9 @@ public class BinaryTree {
 					 */
 					tempNode.right = node.right;
 					node.right.parents = tempNode;
+					/**
+					 * 防止其左节点就是自己本身，形成死循环
+					 */
 					if (node.left != tempNode) {
 						tempNode.left = node.left;
 						node.left.parents = tempNode;
@@ -215,6 +219,29 @@ public class BinaryTree {
 			else
 				node = node.left;
 		}
+	}
+
+	/**
+	 * 查询节点的父节点
+	 * 
+	 * @param key
+	 * @return
+	 */
+	public BinaryTreeNode findPrefixNode(int key) {
+		if (root == null) {
+			return null;
+		}
+		BinaryTreeNode node = root;
+		while (node != null) {
+			if (node.key < key)
+				node = node.right;
+			else if (node.key == key)
+				return node.parents;
+			else
+				node = node.left;
+		}
+		return null;
+
 	}
 
 }
