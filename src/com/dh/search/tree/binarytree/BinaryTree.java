@@ -1,5 +1,8 @@
 package com.dh.search.tree.binarytree;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * 二叉查找树，也叫做二叉搜索树，支持快速插入，删除数据。 其规则如下：任意一个节点，左子树的每个节点都小于这个节点，右子树的节点都大于这个节点的值。
  * 至于等于，直接覆盖 如是节点是对象类型，我们，我们根据某个key值判断，对象不一样，我们可以让节点维持一个链表处理。
@@ -241,7 +244,94 @@ public class BinaryTree {
 				node = node.left;
 		}
 		return null;
+	}
+
+	/**
+	 * 前序 本->左->右
+	 * 
+	 * 这个玩意递归很简单
+	 * 
+	 * @return
+	 */
+	public List<Integer> frontSort() {
+		List<Integer> list = new ArrayList<>();
+		addFrontNode(root, list);
+		return list;
+	}
+
+	public void addFrontNode(BinaryTreeNode node, List<Integer> list) {
+		list.add(node.value);
+		if (node.left != null)
+			addFrontNode(node.left, list);
+		if (node.right != null)
+			addFrontNode(node.right, list);
+	}
+
+	/**
+	 * 中序 左->本->右
+	 * 
+	 * @return
+	 */
+	public List<Integer> mediumSort() {
+		List<Integer> list = new ArrayList<>();
+		addMediumNode(root, list);
+		return list;
+	}
+
+	public void addMediumNode(BinaryTreeNode node, List<Integer> list) {
+		if (node.left != null)
+			addMediumNode(node.left, list);
+		list.add(node.value);
+		if (node.right != null)
+			addMediumNode(node.right, list);
 
 	}
 
+	/**
+	 * 后序 左->右->本
+	 * 
+	 * @return
+	 */
+	public List<Integer> behindSort() {
+		List<Integer> list = new ArrayList<>();
+		addBehindNode(root, list);
+		return list;
+	}
+
+	public void addBehindNode(BinaryTreeNode node, List<Integer> list) {
+		if (node.left != null)
+			addBehindNode(node.left, list);
+		if (node.right != null)
+			addMediumNode(node.right, list);
+		list.add(node.value);
+
+	}
+
+	/**
+	 * 层级 一层一层的
+	 * 
+	 * @return
+	 */
+	public List<Integer> levelSort() {
+		List<Integer> list = new ArrayList<>();
+		List<BinaryTreeNode> temp = new ArrayList<>();
+		temp.add(root);
+		addLevelNode(temp, list);
+		return list;
+	}
+
+	public void addLevelNode(List<BinaryTreeNode> nodes, List<Integer> list) {
+		if (nodes.size() == 0)
+			return;
+		List<BinaryTreeNode> temp = new ArrayList<>();
+		for (BinaryTreeNode node : nodes) {
+			list.add(node.value);
+			if (node.left != null)
+				temp.add(node.left);
+			if (node.right != null)
+				temp.add(node.right);
+		}
+		nodes = null;
+		addLevelNode(temp, list);
+	}
 }
