@@ -1,4 +1,4 @@
-package com.dh.sort.head;
+package com.dh.sort.heap;
 
 /**
  * 本质上是一个完全二叉树，有大顶树（父节点大于子节点），小顶树（父节点小于总结点）
@@ -21,13 +21,13 @@ package com.dh.sort.head;
  * @author Lenovo
  *
  */
-public class HeapSort {
+public class HeapSortYuan {
 
 	public int[] a;
 	public int total;
 	public int count;
 
-	public HeapSort(int capacity) {
+	public HeapSortYuan(int capacity) {
 		a = new int[capacity + 1];
 		total = capacity;
 		count = 0;

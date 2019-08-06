@@ -1,53 +1,36 @@
 package com.dh.sort.heap;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
- * 小顶堆
+ * 绑定一个list，动态获取其top k数据 后续若有需求，可以新增新的api接口,目前仅仅支持插入和获取全部数据
  * 
  * @author Lenovo
  *
  */
-public class SmallHeap {
+public class TopKDynamic {
+	private List<Integer> list;
 	private int[] data;
-	private int currentSize;
 	private int length;
+	private int currentSize;
+	private int topK;
 
-	public SmallHeap() {
-		data = new int[8];
-		length = 8;
+	/**
+	 * 初始化对象的时候就建立稳定的队列
+	 * 
+	 * @param list
+	 * @param topK
+	 */
+	public TopKDynamic(int topK) {
 		currentSize = 1;
+		this.list = new ArrayList<>();
+		this.length = topK + 2;
+		this.topK = topK;
+		data = new int[topK + 2];
 	}
 
-	public SmallHeap(int length) {
-		data = new int[length];
-		this.length = length;
-		currentSize = 1;
-	}
-
-	/**
-	 * 长度
-	 * 
-	 * @return
-	 */
-	public int getLength() {
-		return length;
-	}
-
-	/**
-	 * 容积
-	 * 
-	 * @return
-	 */
-	public int getSize() {
-		return currentSize;
-	}
-
-	/**
-	 * 插入数据
-	 * 
-	 * @param node
-	 */
-	public void insert(int node) {
-		resize();
+	public void insertHeap(int node) {
 		data[currentSize] = node;
 		int tempIndex = currentSize;
 		while (tempIndex > 0) {
@@ -61,35 +44,13 @@ public class SmallHeap {
 			}
 		}
 		currentSize++;
-
-	}
-
-	public void resize() {
-		boolean flag = true;
-		int[] newData = null;
-		if (length < currentSize * 2) {
-			flag = false;
-			newData = new int[length * 2];
-			length = length * 2;
-		} else if (length / 10 > currentSize) {
-			flag = false;
-			newData = new int[length / 2];
-			length = length / 2;
-		}
-		if (flag)
-			return;
-		int cursor = data.length > length ? length : data.length;
-		for (int i = 1; i < cursor; i++) {
-			newData[i] = data[i];
-		}
-		data = newData;
 	}
 
 	/**
 	 * 删除root节点
 	 */
 	public void deleteRoot() {
-		resize();
+
 		if (currentSize == 1) {
 			return;
 		}
@@ -155,6 +116,22 @@ public class SmallHeap {
 
 	}
 
+	public void add(int node) {
+		list.add(node);
+		if (currentSize > topK) {
+			if (data[1] < node) {
+				deleteRoot();
+				insertHeap(node);
+			}
+		} else
+			insertHeap(node);
+
+	}
+
+	public List<Integer> getList() {
+		return list;
+	}
+
 	/**
 	 * 交换数据
 	 * 
@@ -168,5 +145,11 @@ public class SmallHeap {
 		a[j] = temp;
 	}
 
+	public int getLength() {
+		return length;
+	}
 
+	public int[] getTopK() {
+		return data;
+	}
 }

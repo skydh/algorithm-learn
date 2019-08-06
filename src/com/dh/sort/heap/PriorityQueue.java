@@ -30,6 +30,10 @@ public class PriorityQueue {
 	private int length;
 	private int currentSize;
 
+	public int getSize() {
+		return currentSize-1;
+	}
+
 	public PriorityQueue() {
 		this(8);
 	}
@@ -59,11 +63,11 @@ public class PriorityQueue {
 		currentSize++;
 	}
 
-	public String get() {
+	public Node get() {
 		resize();
 		Node temp = data[1];
 		if (currentSize == 1) {
-			return "";
+			return null;
 		}
 		data[1] = data[currentSize - 1];
 		data[currentSize - 1] = null;
@@ -85,7 +89,7 @@ public class PriorityQueue {
 
 		}
 		currentSize--;
-		return temp.value;
+		return temp;
 	}
 
 	public void resize() {
