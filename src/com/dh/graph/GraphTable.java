@@ -90,7 +90,7 @@ public class GraphTable {
 					queue.add(edge.end);
 
 				}
-				
+
 			}
 
 		}
@@ -105,6 +105,24 @@ public class GraphTable {
 		}
 		System.out.println(temp);
 		System.out.println(start);
+	}
+
+	public boolean dfs(int s, int t) {
+		if (s == t)
+			return true;
+		List<Edge> listTemp = list[s];
+		for (Edge edge : listTemp) {
+			if (edge.end == t)
+				return true;
+			else {
+				if (dfs(edge.end, t)) {
+					System.out.println(edge.end);
+					return true;
+				}
+			}
+		}
+		return false;
+
 	}
 
 }

@@ -12,7 +12,7 @@ public class GraphTest {
 		gt.addEdge(3, 4, 1);
 		gt.addEdge(4, 5, 1);
 		gt.addEdge(5, 1, 1);
-		gt.bfs(0, 5);
+		gt.dfs(0, 5);
 
 	}
 
