@@ -125,4 +125,80 @@ public class GraphTable {
 
 	}
 
+	/**
+	 * dijkst算法是一个广度搜索算法。算法思路很有意思
+	 * 建立一个数组，存放原点到其他节点的距离，建立一个集合，存放其他所有原点，然后在数组找出最小的一个点，将其从集合pass，同时修改数组的值，
+	 * 看看有没有更小的值， 对了，为了记录目的节点的位置，在建立一个数组用来存储前驱节点
+	 * 
+	 * 首先定义一个优先级队列
+	 * 前面学习小顶堆时定义过了，因此直接使用，顺便加一些api.，但是加update操作很难受，不知道如何是好，同时优先级队列的属性和这个不是很匹配，
+	 * 想了下， 还是算了吧，直接用数组来玩
+	 * 
+	 * @author Lenovo
+	 *
+	 */
+	public void dijkst(int s, int t) {
+		boolean[] isUse = new boolean[nodeNum];
+		isUse[s] = true;
+		List<Edge> listEdge = list[s];
+		int[] weights = new int[nodeNum];
+		for (int i = 0; i < nodeNum; i++)
+			weights[i] = Integer.MAX_VALUE;
+		weights[s] = 0;
+		int[] pre = new int[nodeNum];
+		for (Edge edge : listEdge) {
+			weights[edge.end] = edge.weights;
+			pre[edge.end] = s;
+		}
+		boolean isFind = true;
+		while (true) {
+			int cursor = findMin(weights, isUse);
+			if (cursor < 0) {
+				isFind = false;
+				break;
+			}
+			if (cursor == t) {
+				break;
+			}
+			List<Edge> listi = list[cursor];
+			for (Edge edge : listi) {
+				int tempDatai = edge.weights + weights[cursor];
+				if (tempDatai < weights[edge.end]) {
+
+					pre[edge.end] = cursor;
+					weights[edge.end] = tempDatai;
+				}
+			}
+			isUse[cursor] = true;
+		}
+
+		if (isFind) {
+			System.out.println("最短路径长度是：" + weights[t]);
+			print(pre, s, t);
+		}
+		// syso
+	}
+
+	/**
+	 * 获取排除已排除最小点的点
+	 * 
+	 * @param data
+	 * @param isUse
+	 * @return
+	 */
+	public int findMin(int[] data, boolean[] isUse) {
+		int min = Integer.MAX_VALUE;
+		int cursor = -1;
+		for (int i = 0; i < data.length; i++) {
+			if (!isUse[i]) {
+				if (data[i] < min) {
+					min = data[i];
+					cursor = i;
+				}
+			}
+
+		}
+		return cursor;
+
+	}
 }

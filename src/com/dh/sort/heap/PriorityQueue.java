@@ -5,6 +5,9 @@ package com.dh.sort.heap;
  * 
  * 数值越大，优先级越高，优先级一样，先来的出去
  * 
+ * 
+ * 如果要是小顶堆，那么，将值加个负号
+ * 
  * @author Lenovo
  *
  */
@@ -31,7 +34,7 @@ public class PriorityQueue {
 	private int currentSize;
 
 	public int getSize() {
-		return currentSize-1;
+		return currentSize - 1;
 	}
 
 	public PriorityQueue() {
@@ -42,6 +45,27 @@ public class PriorityQueue {
 		data = new Node[length];
 		this.length = length;
 		currentSize = 1;
+
+	}
+
+	/**
+	 * 直接丢一个node节点进去
+	 * 
+	 * @param node
+	 */
+	public void push(Node node) {
+		push(node.value, node.sequence);
+	}
+
+	/**
+	 * 更新这个节点
+	 * 
+	 * @param node
+	 */
+	public void update(Node node) {
+		while (true) {
+
+		}
 
 	}
 
