@@ -14,7 +14,21 @@ import java.util.Queue;
 public class GraphTable {
 	private List<Edge>[] list;
 
+	/**
+	 * 初始化时就要给点赋值
+	 */
+	private Point[] points;
 	private int nodeNum;
+
+	@SuppressWarnings("unchecked")
+	public GraphTable(Point[] points) {
+		this.nodeNum = points.length;
+		list = new ArrayList[points.length];
+		for (int i = 0; i < points.length; i++) {
+			list[i] = new ArrayList<>();
+		}
+		this.points = points;
+	}
 
 	@SuppressWarnings("unchecked")
 	public GraphTable(int num) {
@@ -23,6 +37,7 @@ public class GraphTable {
 		for (int i = 0; i < num; i++) {
 			list[i] = new ArrayList<>();
 		}
+
 	}
 
 	public void addEdge(int start, int end, int weights) {
@@ -43,6 +58,17 @@ public class GraphTable {
 			this.start = start;
 			this.end = end;
 			this.weights = weights;
+		}
+
+	}
+
+	public class Point {
+		public int x;
+		public int y;
+
+		public Point(int x, int y) {
+			this.x = x;
+			this.y = y;
 		}
 
 	}
@@ -201,4 +227,56 @@ public class GraphTable {
 		return cursor;
 
 	}
+
+	/**
+	 * A*算法，这个算法不一定是最优解，但是可能是比较优解，适用于大地图的情况，因为对于大地图来说，dj算法需要遍很多的最小顶点，只要是比这个节点小的，
+	 * 都要遍历，看起来很高大上，实则很low,就是在加了一个判断条件，就是曼哈顿距离
+	 */
+	public void a(int s, int t) {
+		boolean[] isUse = new boolean[nodeNum];
+		isUse[s] = true;
+		List<Edge> listEdge = list[s];
+		int[] weights = new int[nodeNum];
+		for (int i = 0; i < nodeNum; i++)
+			weights[i] = Integer.MAX_VALUE;
+		weights[s] = 0;
+		int[] pre = new int[nodeNum];
+		for (Edge edge : listEdge) {
+			weights[edge.end] = edge.weights + absLength(points[edge.end], points[t]);
+			pre[edge.end] = s;
+		}
+		boolean isFind = true;
+		while (true) {
+			int cursor = findMin(weights, isUse);
+			if (cursor < 0) {
+				isFind = false;
+				break;
+			}
+			if (cursor == t) {
+				break;
+			}
+			List<Edge> listi = list[cursor];
+			for (Edge edge : listi) {
+				int tempDatai = edge.weights + weights[cursor] + absLength(points[edge.end], points[t]);
+				if (tempDatai < weights[edge.end]) {
+
+					pre[edge.end] = cursor;
+					weights[edge.end] = tempDatai;
+				}
+			}
+			isUse[cursor] = true;
+		}
+
+		if (isFind) {
+			System.out.println("最短路径长度是：" + weights[t]);
+			print(pre, s, t);
+		}
+		// syso
+
+	}
+
+	public int absLength(Point v1, Point v2) { // Vertex 表示顶点，后面有定义
+		return Math.abs(v1.x - v2.x) + Math.abs(v1.y - v2.y);
+	}
+
 }
