@@ -279,4 +279,82 @@ public class GraphTable {
 		return Math.abs(v1.x - v2.x) + Math.abs(v1.y - v2.y);
 	}
 
+	/**
+	 * 打印顺序，文件加载顺序 ps,这里的邻接表0->1,表示的是0先于1执行。
+	 */
+	public void Kahn() {
+		/**
+		 * 因此先统计入度，表示每个文件执行前，必须先执行哪个文件
+		 */
+		int[] temp = new int[nodeNum];
+		for (int i = 0; i < list.length; i++) {
+			List<Edge> listEdge = list[i];
+			for (Edge edge : listEdge) {
+				temp[edge.end]++;
+			}
+		}
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+		for (int i = 0; i < nodeNum; i++) {
+			if (temp[i] == 0)
+				queue.add(i);
+		}
+		while (!queue.isEmpty()) {
+			int i = queue.remove();
+			System.out.println("->" + i);
+			List<Edge> listEdge = list[i];
+			for (Edge edge : listEdge) {
+				int j = edge.end;
+				temp[j]--;
+				if (temp[j] == 0)
+					queue.add(j);
+			}
+		}
+	}
+
+	/**
+	 * 不能存在循环
+	 */
+	@SuppressWarnings("unchecked")
+	public void dfs() {
+		/**
+		 * 构建逆临街矩阵 0->1,表示0依赖1,1要比0先执行。 当0后面没有值时，那么就是可以打印了
+		 */
+		List<Edge>[] newList = new ArrayList[nodeNum];
+		for (int i = 0; i < nodeNum; i++)
+			list[i] = new ArrayList<Edge>();
+
+		for (int i = 0; i < nodeNum; i++) {
+			List<Edge> listEdge = list[i];
+			for (Edge edge : listEdge) {
+				Edge newEdge = new Edge(edge.end, edge.start, edge.weights);
+				newList[edge.end].add(newEdge);
+			}
+		}
+		boolean[] isUse = new boolean[nodeNum];
+		for (int i = 0; i < nodeNum; i++) {
+			doHelper(i, isUse, newList);
+		}
+
+	}
+
+	/**
+	 * 很简单
+	 * @param node
+	 * @param isUse
+	 * @param newList
+	 */
+	public void doHelper(int node, boolean[] isUse, List<Edge>[] newList) {
+		List<Edge> listTemp = newList[node];
+		for (int i = 0; i < listTemp.size();) {
+			Edge edge = listTemp.get(i);
+			if (isUse[edge.end])
+				continue;
+			doHelper(edge.end, isUse, newList);
+			
+		}
+
+		isUse[node] = true;
+		System.out.println("->" + node);
+	}
+
 }
