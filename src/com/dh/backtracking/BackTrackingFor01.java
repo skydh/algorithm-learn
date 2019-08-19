@@ -8,7 +8,8 @@ package com.dh.backtracking;
  * 
  * n个物品质量不确定 背包w空间，如何装，使得空间最大。
  * 
- * @author Lenovo
+ * @
+ * author Lenovo
  *
  */
 public class BackTrackingFor01 {
