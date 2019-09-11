@@ -7,7 +7,6 @@ package com.dh.leetcode;
  *
  */
 public class SingleNonDuplicate {
-
 	public int singleNonDuplicate(int[] nums) {
 		if (nums == null)
 			return 0;
@@ -22,7 +21,6 @@ public class SingleNonDuplicate {
 				break;
 		}
 		return nums[cursor1];
-
 	}
 
 }
