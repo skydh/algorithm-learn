@@ -125,11 +125,19 @@ public class ScheduleCourse {
 	}
 
 	public static void main(String[] arg) {
-		ScheduleCourse scheduleCourse = new ScheduleCourse();
-
-		int[][] group = { { 5, 5 }, { 4, 6 }, { 2, 6 } };
-
-		System.out.println(scheduleCourse.scheduleCourse(group));
+		// ScheduleCourse scheduleCourse = new ScheduleCourse();
+		//
+		// int[][] group = { { 5, 5 }, { 4, 6 }, { 2, 6 } };
+		//
+		// System.out.println(scheduleCourse.scheduleCourse(group));
+		
+		PriorityQueue<Integer> pq = new PriorityQueue<>();
+		pq.offer(1);
+		pq.offer(2);
+		pq.offer(4);
+		pq.offer(9);
+		pq.offer(5);
+		System.out.println(pq.remove());
 	}
 
 }
