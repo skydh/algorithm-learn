@@ -1,6 +1,9 @@
 package com.dh.dynamic;
 
 /**
+ * 不要太执着于动态规划啊
+ * 
+ * 
  * 用动态规划处理Levenshtein距离，2个字符串之间的距离 所有的动态规划都是可以用回溯算法解决的。
  * 
  * 我们分析算法时，先看看是否可以用回溯算法，解决，然后判断是否存在重复子问题，若存在，要么加个备忘录，要么继续分析使用动态规划来解决。
@@ -49,9 +52,10 @@ public class DynamicForLevenshtein {
 					/**
 					 * 要么直接不算值，直接过去，要么从另外2个点进来。
 					 */
-					tempArray[i][j]=getMin(tempArray[i - 1][j]+1,tempArray[i][j - 1]+1,tempArray[i-1][j-1]);
+					tempArray[i][j] = getMin(tempArray[i - 1][j] + 1, tempArray[i][j - 1] + 1, tempArray[i - 1][j - 1]);
 				} else {
-					tempArray[i][j]=getMin(tempArray[i - 1][j]+1,tempArray[i][j - 1]+1,tempArray[i-1][j-1]+1);
+					tempArray[i][j] = getMin(tempArray[i - 1][j] + 1, tempArray[i][j - 1] + 1,
+							tempArray[i - 1][j - 1] + 1);
 				}
 
 			}
