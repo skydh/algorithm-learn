@@ -1,9 +1,6 @@
 package com.dh.leetcode;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
 import java.util.PriorityQueue;
-import java.util.Map.Entry;
 
 public class Test {
 	public static int SQR1(int b) {
