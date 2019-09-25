@@ -1,5 +1,10 @@
 package com.dh.leetcode;
 
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.PriorityQueue;
+import java.util.Map.Entry;
+
 public class Test {
 	public static int SQR1(int b) {
 		if (b <= 0)
@@ -17,7 +22,16 @@ public class Test {
 	}
 
 	public static void main(String[] arg) {
-		System.out.println(SQR1(4));
+		PriorityQueue<String[]> pq = new PriorityQueue<>((a, b) -> (Integer.parseInt(b[1]) - Integer.parseInt(a[1])));
+		String[] data1 = { "hello", "5" };
+		String[] data2 = { "hello1", "6" };
+		String[] data3 = { "hello12", "7" };
+		String[] data4 = { "hello123", "8" };
+		pq.add(data1);
+		pq.add(data2);
+		pq.add(data3);
+		pq.add(data4);
+		System.out.println(pq.remove()[0]);
 
 	}
 
