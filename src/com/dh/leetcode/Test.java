@@ -30,6 +30,9 @@ public class Test {
 		pq.add(data4);
 		System.out.println(pq.remove()[0]);
 
+		System.out.println(1056389759 > (1 << 31));
+
+		System.out.println(123 % 10);
 	}
 
 }
