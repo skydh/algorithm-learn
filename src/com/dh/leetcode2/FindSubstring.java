@@ -83,10 +83,10 @@ public class FindSubstring {
 
 	public static void main(String[] args) {
 
-		String temp = "wordgoodgoodgoodbestword";
-		String[] words = { "word", "good", "best", "good" };
-
-		System.out.println(findSubstring(temp, words));
+		// String temp = "wordgoodgoodgoodbestword";
+		// String[] words = { "word", "good", "best", "good" };
+		//
+		// System.out.println(findSubstring(temp, words));
 
 	}
 }
