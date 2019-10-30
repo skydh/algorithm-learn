@@ -129,8 +129,9 @@ public class SolveSudoku {
 
 	public static void main(String[] args) {
 		
-		//2147483647
-		System.out.println(Integer.MAX_VALUE);
+		int i=1;
+		int a=i++;
+		System.out.println(a);
 
 	}
 }
