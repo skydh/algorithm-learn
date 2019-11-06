@@ -1,4 +1,4 @@
-package com.dh.lettcode3;
+package com.dh.leetcode3;
 public class ListNode {
 	int val;
 	ListNode next;

@@ -1,4 +1,4 @@
-package com.dh.lettcode3;
+package com.dh.leetcode3;
 
 /**
  * 实现 int sqrt(int x) 函数。

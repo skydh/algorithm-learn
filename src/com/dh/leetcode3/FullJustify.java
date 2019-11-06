@@ -1,4 +1,4 @@
-package com.dh.lettcode3;
+package com.dh.leetcode3;
 
 import java.util.ArrayList;
 import java.util.List;
