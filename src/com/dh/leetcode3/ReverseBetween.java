@@ -39,8 +39,6 @@ public class ReverseBetween {
 				newNode = newNode.next;
 				cursor++;
 			}
-			
-
 			ListNode node = newNode.next;
 			ListNode node1 = newNode.next.next;
 			if (node1 == null)
@@ -52,11 +50,8 @@ public class ReverseBetween {
 				node1 = temp;
 				m++;
 			}
-			
-			
 			newNode.next.next = node1;
-			
-			newNode.next=node;
+			newNode.next = node;
 			return head;
 		}
 
