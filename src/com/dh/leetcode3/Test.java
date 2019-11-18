@@ -4,7 +4,8 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		System.out.println(6^4);
+		StringBuilder sb = new StringBuilder("asd123");
+		System.out.println(sb.delete(sb.length() - 2, sb.length()));
 
 	}
 
