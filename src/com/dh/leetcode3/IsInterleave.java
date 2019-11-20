@@ -18,8 +18,69 @@ package com.dh.leetcode3;
 public class IsInterleave {
 
 	public boolean isInterleave(String s1, String s2, String s3) {
-		return false;
+		if (s1.length() + s2.length() != s3.length())
+			return false;
+		boolean[][] isGet = new boolean[s1.length()+1][s2.length()+1];
 
+		return doHelper1(s1, s2, s3, 0, 0, 0, isGet);
+
+		// return doHelper(s1, s2, s3, 0, 0, 0);
+	}
+
+	/**
+	 * 直接回溯
+	 * 
+	 * @param s1
+	 * @param s2
+	 * @param s3
+	 * @param cursor1
+	 * @param cursor2
+	 * @param cursor3
+	 * @return
+	 */
+	public boolean doHelper(String s1, String s2, String s3, int cursor1, int cursor2, int cursor3) {
+		if (cursor3 == s3.length())
+			return true;
+
+		if (cursor1 < s1.length() && s1.charAt(cursor1) == s3.charAt(cursor3))
+			if (doHelper(s1, s2, s3, cursor1 + 1, cursor2, cursor3 + 1))
+				return true;
+
+		if (cursor2 < s2.length() && s2.charAt(cursor2) == s3.charAt(cursor3))
+			if (doHelper(s1, s2, s3, cursor1, cursor2 + 1, cursor3 + 1))
+				return true;
+
+		return false;
+	}
+
+	/**
+	 * 回溯+剪
+	 * 
+	 * @param s1
+	 * @param s2
+	 * @param s3
+	 * @param cursor1
+	 * @param cursor2
+	 * @param cursor3
+	 * @return
+	 */
+	public boolean doHelper1(String s1, String s2, String s3, int cursor1, int cursor2, int cursor3,
+			boolean[][] isGet) {
+		if (cursor3 == s3.length())
+			return true;
+		if (isGet[cursor1][cursor2])
+			return false;
+		isGet[cursor1][cursor2] = true;
+
+		if (cursor1 < s1.length() && s1.charAt(cursor1) == s3.charAt(cursor3))
+			if (doHelper1(s1, s2, s3, cursor1 + 1, cursor2, cursor3 + 1, isGet))
+				return true;
+
+		if (cursor2 < s2.length() && s2.charAt(cursor2) == s3.charAt(cursor3))
+			if (doHelper1(s1, s2, s3, cursor1, cursor2 + 1, cursor3 + 1, isGet))
+				return true;
+
+		return false;
 	}
 
 }
