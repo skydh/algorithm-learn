@@ -29,7 +29,38 @@ package com.dh.leetcode3;
 public class NumDistinct {
 
 	public int numDistinct(String s, String t) {
-		return 0;
+		if (s == null || t == null)
+			return 0;
+		if (s.equals("") || t.equals(""))
+			return 0;
+		int[][] dp = new int[t.length()][s.length()];
+		if (s.charAt(0) == t.charAt(0))
+			dp[0][0] = 1;
+		for (int i = 1; i < s.length(); i++)
+			if (s.charAt(i) == t.charAt(0))
+				dp[0][i] = dp[0][i - 1] + 1;
+			else
+				dp[0][i] = dp[0][i - 1];
+
+		/**
+		 * 这里，最后一个字符不一样的情况很简单，直接取前面的值
+		 * 
+		 * 
+		 * 一样时，则是这样的，去掉被匹配串的最后一个，也就是取前面的值，一样，那么我去掉匹配和被匹配最后一个串的值，取前面的值即可
+		 * 
+		 */
+		for (int i = 1; i < t.length(); i++) {
+			for (int j = 1; j < s.length(); j++) {
+				if (s.charAt(j) == t.charAt(i)) {
+					dp[i][j] = dp[i][j - 1] + dp[i - 1][j - 1];
+					;
+				} else {
+					dp[i][j] = dp[i][j - 1];
+				}
+
+			}
+		}
+		return dp[t.length() - 1][s.length() - 1];
 
 	}
 
