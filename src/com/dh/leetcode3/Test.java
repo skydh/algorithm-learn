@@ -4,8 +4,9 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		//StringBuilder sb = new StringBuilder("asd123");
-		System.out.println((char) ('a' - 32));
+		String a="abcdefg";
+		System.out.println(a.substring(3,2));
+		System.out.println(a);
 
 	}
 
