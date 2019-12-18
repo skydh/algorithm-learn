@@ -5,9 +5,7 @@ public class Test {
 	public static void main(String[] args) {
 
 		String a="abcdefg";
-		System.out.println(a.hashCode());
-		System.out.println(a.hashCode()>>>16);
-		System.out.println(hash(a));
+		System.out.println(a.substring(2, 10));
 		
 
 	}
