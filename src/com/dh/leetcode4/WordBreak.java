@@ -28,16 +28,19 @@ import java.util.List;
  */
 public class WordBreak {
 
-	
 	/**
 	 * 暴力方法不行哦
+	 * 
 	 * @param s
 	 * @param wordDict
 	 * @return
 	 */
 	public boolean wordBreak(String s, List<String> wordDict) {
 		HashMap<Character, List<String>> map = new HashMap<>();
+		HashMap<String, Integer> map1 = new HashMap<>();
+		int cursor = 0;
 		for (String str : wordDict) {
+			map1.put(str, cursor);
 			List<String> list = map.get(str.charAt(0));
 			if (list != null)
 				list.add(str);
@@ -46,13 +49,16 @@ public class WordBreak {
 				list.add(str);
 				map.put(str.charAt(0), list);
 			}
+			cursor++;
 		}
+		boolean[][] isSuit = new boolean[s.length()][wordDict.size()];
 
-		return doHelper(map, s, 0);
+		return doHelper(map, s, 0, map1, isSuit);
 
 	}
 
-	public boolean doHelper(HashMap<Character, List<String>> map, String s, int cursor) {
+	public boolean doHelper(HashMap<Character, List<String>> map, String s, int cursor, HashMap<String, Integer> map1,
+			boolean[][] isSuit) {
 		if (cursor >= s.length())
 			return true;
 
@@ -62,10 +68,16 @@ public class WordBreak {
 		for (String str : list) {
 			if (str.length() > s.length() - cursor)
 				continue;
+			if (isSuit[cursor][map1.get(str)])
+				continue;
 			if (str.equals(s.substring(cursor, cursor + str.length()))) {
-				boolean isSuit = doHelper(map, s, cursor + str.length());
-				if (isSuit)
+				boolean result = doHelper(map, s, cursor + str.length(), map1, isSuit);
+				if (result)
 					return true;
+				else {
+
+					isSuit[cursor][map1.get(str)] = true;
+				}
 			}
 
 		}
