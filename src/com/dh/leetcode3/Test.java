@@ -4,8 +4,8 @@ public class Test {
 
 	public static void main(String[] args) {
 
-		String a="abcdefg";
-		System.out.println(a.substring(2, 10));
+		String a="ab";
+		System.out.println(a.substring(0, 2));
 		
 
 	}
