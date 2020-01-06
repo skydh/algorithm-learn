@@ -5,7 +5,7 @@ public class Test {
 	public static void main(String[] args) {
 
 	//	String a="ab";
-		System.out.println(1/3d);
+		System.out.println(' '-0);
 		
 
 	}
