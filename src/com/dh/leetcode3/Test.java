@@ -14,7 +14,9 @@ public class Test {
 		priorityQueue.add(4);
 		System.out.println(priorityQueue.size());
 		System.out.println(priorityQueue.peek());
-		System.out.println(priorityQueue.size());
+		System.out.println(Integer.MAX_VALUE);
+		
+		System.out.println("abcde".substring(0,2));
 
 	}
 
