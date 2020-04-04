@@ -1,7 +1,5 @@
 package com.dh.lettcode5;
 
-import java.util.Stack;
-
 /**
  * 有效括号字符串 仅由 "(" 和 ")" 构成，并符合下述几个条件之一：
  * 
